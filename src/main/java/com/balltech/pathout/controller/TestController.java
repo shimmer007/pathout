@@ -1,6 +1,8 @@
 package com.balltech.pathout.controller;
 
+import com.balltech.pathout.User.User;
 import com.balltech.pathout.database.model.ContentValues;
+import com.balltech.pathout.database.utils.DbUtil;
 import com.google.protobuf.StringValue;
 import com.mysql.cj.log.Log;
 import com.zaxxer.hikari.HikariConfig;
@@ -22,5 +24,16 @@ public class TestController {
     @GetMapping("/test")
     public String test() {
         return "Fine";
+    }
+
+    @GetMapping("/addUser")
+    public boolean addUser() {
+        User user = new User("jack", "18217583389", "liuwen", "341222199312072097");
+        if (!DbUtil.isUserValid(user)) {
+            LOG.error("User exist alread, pls check again!");
+            return false;
+        }
+
+        return DbUtil.addUser(user);
     }
 }

@@ -31,7 +31,7 @@ public class PlayerDataSheet {
     }
 
     private void initData(String id) {
-        HikariDataSource ds = new HikariDataSource(DbUtil.CONFIG);
+        HikariDataSource ds = new HikariDataSource(DbUtil.getConfig());
         try (Connection connection = ds.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM playerdatasheet where user_id = "
                 + mUid);

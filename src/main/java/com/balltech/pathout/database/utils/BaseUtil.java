@@ -1,8 +1,13 @@
 package com.balltech.pathout.database.utils;
 
+import com.balltech.pathout.User.User;
 import com.balltech.pathout.database.model.Point;
+import com.mysql.cj.log.Log;
 import org.apache.log4j.Logger;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,5 +59,24 @@ public class BaseUtil {
             stringBuilder.append(point.getX()).append(",").append(point.getY()).append(";");
         }
         return stringBuilder.toString();
+    }
+
+    public static String getHash(User user) {
+        if (user == null) {
+            LOG.error("Invalid user when md5 calculate!");
+            return "";
+        }
+        String pendingStr = user.getMUserName() + user.getMUserNickName() + user.getMPhoneNum() + user.getMPhoneNum();
+        try {
+            byte[] bytesOfMessage = pendingStr.getBytes("UTF-8");
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] thedigest = md.digest(bytesOfMessage);
+            return new String(thedigest, "UTF-8");
+        } catch (NoSuchAlgorithmException e) {
+            LOG.error("No supported md5:" + e.toString());
+        } catch (UnsupportedEncodingException e) {
+            LOG.error("No supported encoding:" + e.toString());
+        }
+        return "";
     }
 }
