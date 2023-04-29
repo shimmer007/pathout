@@ -1,4 +1,4 @@
-package com.balltech.pathout.database;
+package com.balltech.pathout.database.utils;
 
 import com.balltech.pathout.database.model.ContentValues;
 import com.zaxxer.hikari.HikariConfig;
@@ -7,9 +7,7 @@ import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
