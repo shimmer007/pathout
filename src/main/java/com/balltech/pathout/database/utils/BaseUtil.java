@@ -61,14 +61,13 @@ public class BaseUtil {
         return stringBuilder.toString();
     }
 
-    public static String getHash(User user) {
-        if (user == null) {
+    public static String getHash(String input) {
+        if (input == null || input.isEmpty()) {
             LOG.error("Invalid user when md5 calculate!");
             return "";
         }
-        String pendingStr = user.getMUserName() + user.getMUserNickName() + user.getMPhoneNum() + user.getMPhoneNum();
         try {
-            byte[] bytesOfMessage = pendingStr.getBytes("UTF-8");
+            byte[] bytesOfMessage = input.getBytes("UTF-8");
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] thedigest = md.digest(bytesOfMessage);
             return new String(thedigest, "UTF-8");

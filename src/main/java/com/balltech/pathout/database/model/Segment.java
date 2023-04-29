@@ -1,20 +1,32 @@
 package com.balltech.pathout.database.model;
 
-public class Segment {
-    private int mStart;
+import lombok.Getter;
+import lombok.Setter;
 
+public class Segment {
+    private static final String SPLIT_SYMBOL = ",";
+    @Getter
+    @Setter
+    private int mStart;
+    @Getter
+    @Setter
     private int mEnd;
 
-    public void setSegment(int start, int end) {
+    public Segment(int start, int end) {
         mStart = start;
         mEnd = end;
     }
 
-    public int getStart() {
-        return mStart;
+    public Segment(String json) {
+        String[] split = json.split(SPLIT_SYMBOL);
+        if (split == null || split.length != 2) {
+            return;
+        }
+        mStart = Integer.valueOf(split[0]);
+        mEnd = Integer.valueOf(split[1]);
     }
 
-    public int getEnd() {
-        return mEnd;
+    public String getJsonStr() {
+        return mStart + SPLIT_SYMBOL + mEnd;
     }
 }
