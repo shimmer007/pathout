@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DbUtil {
-    private static final HikariConfig CONFIG = new HikariConfig();
+    public static final HikariConfig CONFIG = new HikariConfig();
 
     private static final Logger LOG = Logger.getLogger(DbUtil.class);
 
